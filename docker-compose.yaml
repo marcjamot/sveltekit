@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  website:
+    build:
+      context: .
+      target: builder
+    ports:
+      - 3000:3000
+    volumes:
+      - type: bind
+        source: src
+        target: /opt/website/src
+        read_only: true
+      - type: bind
+        source: static
+        target: /opt/website/static
+        read_only: true
+    command: yarn dev --host --port 3000
